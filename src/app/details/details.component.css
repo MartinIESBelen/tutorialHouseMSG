@@ -1,0 +1,93 @@
+.listing-photo {
+  height: 600px;
+  width: 50%;
+  object-fit: cover;
+  border-radius: 30px;
+  float: right;
+}
+
+.listing-heading {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.listing-location {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.listing-location::before {
+  content: url('/assets/location-pin.svg') / '';
+}
+
+.listing-features > .section-heading {
+  color: var(--secondary-color);
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.listing-features {
+  margin-bottom: 20px;
+}
+
+.listing-features > ul {
+  list-style: none;
+  padding: 0;
+}
+
+.listing-features > ul > li {
+  font-size: 14px;
+}
+
+/*Solo funciona en caso de tener un icono*/
+.listing-features > ul > li::before {
+  content: url('/assets/feature.svg') / '';
+  margin-right: 10px;
+}
+
+.listing-apply {
+  margin-top: 20px;
+}
+.listing-apply form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+}
+input {
+  padding: 10px;
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+}
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: -5px;
+}
+.weather-section {
+  background-color: var(--accent-color);
+  padding: 15px;
+  border-radius: 15px;
+  margin-top: 20px;
+}
+
+.weather-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.weather-info .temp {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin: 0;
+}
+#map {
+  height: 400px;
+  width: 100%;
+  border-radius: 15px;
+  margin-top: 10px;
+  z-index: 1; /* Para asegurar que se vea bien */
+}

@@ -1,0 +1,53 @@
+<article>
+  <img class="listing-photo" [src]="housingLocation?.photo"
+       alt="Exterior photo of {{housingLocation?.name}}"/>
+  <section class="listing-description">
+    <h2 class="listing-heading">{{housingLocation?.name}}</h2>
+    <p class="listing-location">{{housingLocation?.city}}, {{housingLocation?.state}}</p>
+  </section>
+  <section class="listing-features">
+    <h2 class="section-heading">About this housing location</h2>
+    <ul>
+      <li>Units available: {{housingLocation?.availableUnits}}</li>
+      <li>Does this location have wifi: {{housingLocation?.wifi}}</li>
+      <li>Does this location have laundry: {{housingLocation?.laundry}}</li>
+      <li>Price: ${{housingLocation?.price}} / month</li>
+      <li>Status: {{ housingLocation?.available ? 'Available' : 'Occupied' }}</li>
+    </ul>
+  </section>
+  <section class="listing-apply">
+    <h2 class="section-heading">Apply now ti live here</h2>
+    <form [formGroup]="applyForm" (submit)="sumitApplication()">
+      <label>Nombre:<input id="firstName" type="text" formControlName="firstName"></label>
+      @if(applyForm.get('firstName')?.invalid && applyForm.get('firstName')?.touched){
+        <span class="error">First Name is required</span>
+      }
+      <label>Apellido:<input id="lastName" type="text" formControlName="lastName"></label>
+      @if(applyForm.get('lastName')?.invalid && applyForm.get('lastName')?.touched){
+        <span class="error">Last Name is required</span>
+      }
+      <label>Email:<input id="email" type="text" formControlName="email"></label>
+      @if(applyForm.get('email')?.invalid && applyForm.get('email')?.touched){
+        <span class="error">First Name is required</span>
+      }
+      <button type="submit" class="primary">Apply now</button>
+    </form>
+  </section>
+  @if (weatherData) {
+    <section class="weather-section">
+      <h2 class="section-heading">Current Weather</h2>
+      <div class="weather-info">
+        <img [src]="weatherData.current.condition.icon" alt="Weather icon">
+        <div>
+          <p class="temp">{{ weatherData.current.temp_c }}°C</p>
+          <p class="condition">{{ weatherData.current.condition.text }}</p>
+          <p class="wind">Wind: {{ weatherData.current.wind_kph }} kph</p>
+        </div>
+      </div>
+    </section>
+  }
+  <section class="map-section">
+    <h2 class="section-heading">Location Map</h2>
+    <div id="map"></div>
+  </section>
+</article>
