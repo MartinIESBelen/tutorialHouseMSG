@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HousingLocationComponent } from '../housing-location/housing-location.component';
 import { HousingLocation } from '../models/housinglocation';
-import {HousingService} from '../housing.service';
 import {inject} from '@angular/core';
+import {ResilientHousingService} from '../resilient-housing.service';
 
 @Component({
   selector: 'app-home',
@@ -12,17 +12,24 @@ import {inject} from '@angular/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   // Creamos una casa de prueba para ver si funciona
   housingLocationList: HousingLocation[] = [];
 
   filteredLocationList: HousingLocation[] = [];
 
-  housingService: HousingService = inject(HousingService);
+  housingService= inject(ResilientHousingService);
 
-  constructor(){
-    this.housingLocationList = new HousingService().getAllHousingLocations();
-    this.filteredLocationList = this.housingLocationList;
+  constructor(){}
+
+  //Usamos ngOnInit para cargar los datos
+  ngOnInit() {
+    this.housingService.getAllHousingLocations().then((dataList: HousingLocation[]) => {
+      this.housingLocationList = dataList;
+      this.filteredLocationList = dataList;
+
+      console.log('Datos recibidos en home:', dataList);
+    });
   }
 
   filterResults(text: string){
