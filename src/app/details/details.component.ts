@@ -25,6 +25,7 @@ export class DetailsComponent implements OnInit {
 
   cd = inject(ChangeDetectorRef);
 
+  //Obliga al usuario a rellenar los campos del form con las validaciones del grupo
   applyForm = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),

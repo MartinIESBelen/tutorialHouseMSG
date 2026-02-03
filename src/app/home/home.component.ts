@@ -8,7 +8,7 @@ import {ResilientHousingService} from '../resilient-housing.service';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HousingLocationComponent], // <--- Importamos el componente hijo
+  imports: [CommonModule, HousingLocationComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

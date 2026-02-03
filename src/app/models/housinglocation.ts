@@ -7,7 +7,7 @@ export interface HousingLocation {
   availableUnits: number;
   wifi: boolean;
   laundry: boolean;
-  // Nuevas propiedades del ejercicio
+
   latitude: number;
   longitude: number;
   price: number;
