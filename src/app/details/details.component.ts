@@ -1,4 +1,4 @@
-import { Component, inject, OnInit} from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router'; // Para leer la URL
 import { HousingLocation } from '../models/housinglocation';
@@ -23,6 +23,8 @@ export class DetailsComponent implements OnInit {
   weatherData: any;
   private map: any;
 
+  cd = inject(ChangeDetectorRef);
+
   applyForm = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
@@ -44,6 +46,8 @@ export class DetailsComponent implements OnInit {
         this.loadWeather();
         this.initMap();
       }
+      //Esto permite cargar los datos de la aplicación al lanzarla
+      this.cd.detectChanges()
     });
 
     //comprobamos si hay algo que guardar en la librería

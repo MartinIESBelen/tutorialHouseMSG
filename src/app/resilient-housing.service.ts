@@ -13,18 +13,17 @@ export class ResilientHousingService implements HousingProvider {
   // Implementación con try/catch para la resiliencia
   async getAllHousingLocations(): Promise<HousingLocation[]> {
     try {
-      // INTENTO A: Infraestructura Externa (API)
+      //  Infraestructura Externa (API)
       const response = await fetch(this.apiUrl);
       if (!response.ok) throw new Error('API inaccesible');
       return await response.json() ?? [];
 
     } catch (error) {
-      // INTENTO B: Fallback (Datos locales)
+      //  Fallback (Datos locales)
       console.warn(' Fallo en API, activando datos locales de emergencia');
       const fallback = await fetch(this.localUrl);
       const data = await fallback.json();
-      // Dependiendo de tu db.json, esto puede ser 'data' o 'data.locations'
-      // Asumiremos que db.json es un array directo o tiene propiedad "locations"
+      // Dependiendo del db.json, esto puede ser 'data' o 'data.locations'
       return data.locations || data;
     }
   }

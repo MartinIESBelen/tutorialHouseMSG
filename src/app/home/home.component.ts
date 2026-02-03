@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HousingLocationComponent } from '../housing-location/housing-location.component';
 import { HousingLocation } from '../models/housinglocation';
@@ -20,6 +20,8 @@ export class HomeComponent implements OnInit {
 
   housingService= inject(ResilientHousingService);
 
+  cd = inject(ChangeDetectorRef);
+
   constructor(){}
 
   //Usamos ngOnInit para cargar los datos
@@ -27,9 +29,10 @@ export class HomeComponent implements OnInit {
     this.housingService.getAllHousingLocations().then((dataList: HousingLocation[]) => {
       this.housingLocationList = dataList;
       this.filteredLocationList = dataList;
-
+      this.cd.detectChanges();
       console.log('Datos recibidos en home:', dataList);
     });
+
   }
 
   filterResults(text: string){

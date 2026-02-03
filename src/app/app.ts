@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router'; // 1. Importamos esto para la na
     <main>
       <a [routerLink]="['/']">
         <header class="brand-name">
-          <img class="brand-logo" src="/logo.svg" alt="logo" aria-hidden="true">
+          <img class="brand-logo" src="/casa.png" alt="logo" aria-hidden="true">
         </header>
       </a>
 
