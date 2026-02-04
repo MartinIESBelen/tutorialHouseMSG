@@ -84,6 +84,7 @@ export class DetailsComponent implements OnInit {
       iconAnchor: [12, 41],
       popupAnchor: [1, -34]
     })
+
     //Si ya existe limpiamos
     if(this.map){
       this.map.remove();

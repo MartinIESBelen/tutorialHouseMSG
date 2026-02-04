@@ -1,0 +1,89 @@
+<div class="container">
+  <h2>Add New Housing Location</h2>
+
+  @if (successMsg) {
+    <div class="alert alert-success">
+      {{ successMsg }}
+    </div>
+  }
+  @if (errorMsg) {
+    <div class="alert alert-error">
+      {{ errorMsg }}
+    </div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" type="text" formControlName="name">
+
+      @if (form.get('name')?.invalid && form.get('name')?.touched) {
+        <div class="validation-error">
+          @if (form.get('name')?.hasError('required')) { <span>Name is required.</span> }
+          @if (form.get('name')?.hasError('minlength')) { <span>Min 3 characters.</span> }
+        </div>
+      }
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label for="city">City</label>
+        <input id="city" type="text" formControlName="city">
+        @if (form.get('city')?.invalid && form.get('city')?.touched) {
+          <span class="validation-error">Required.</span>
+        }
+      </div>
+      <div class="col">
+        <label for="state">State</label>
+        <input id="state" type="text" formControlName="state">
+        @if (form.get('state')?.invalid && form.get('state')?.touched) {
+          <span class="validation-error">Required.</span>
+        }
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label for="units">Available Units</label>
+        <input id="units" type="number" formControlName="availableUnits">
+        @if (form.get('availableUnits')?.invalid && form.get('availableUnits')?.touched) {
+          <span class="validation-error">Min 1 unit.</span>
+        }
+      </div>
+      <div class="col">
+        <label for="price">Price</label>
+        <input id="price" type="number" formControlName="price">
+        @if (form.get('price')?.invalid && form.get('price')?.touched) {
+          <span class="validation-error">Min $10,000.</span>
+        }
+      </div>
+    </div>
+
+    <div class="checkbox-group">
+      <div class="checkbox-item">
+        <input id="wifi" type="checkbox" formControlName="wifi">
+        <label for="wifi">Has Wifi</label>
+      </div>
+      <div class="checkbox-item">
+        <input id="laundry" type="checkbox" formControlName="laundry">
+        <label for="laundry">Has Laundry</label>
+      </div>
+      <div class="checkbox-item">
+        <input id="available" type="checkbox" formControlName="available">
+        <label for="available">Is Available Now</label>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="submit" [disabled]="form.invalid || submitting" class="btn-primary">
+        {{ submitting ? 'Saving...' : 'Save Housing' }}
+      </button>
+
+      <button type="button" (click)="cancel()" class="btn-secondary">
+        Cancel
+      </button>
+    </div>
+
+  </form>
+</div>

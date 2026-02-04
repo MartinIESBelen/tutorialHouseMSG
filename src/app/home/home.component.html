@@ -3,6 +3,11 @@
     <input type="text" placeholder="Filter by city" #filter>
     <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
   </form>
+
+  <div style="margin-top: 20px; text-align: right;">
+    <a [routerLink]="['/add']" class="primary" style="text-decoration: none; padding: 10px;">+ Add New House</a>
+  </div>
+
 </section>
 <section class="results">
   @for (housingLocation of filteredLocationList; track housingLocation.id) {
