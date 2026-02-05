@@ -1,7 +1,18 @@
 <section>
   <form>
-    <input type="text" placeholder="Filter by city" #filter>
-    <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
+    <input type="text" placeholder="Filter by city" #filter1>
+
+    <label>
+    Solo viviendas disponibles<input type="checkbox" #filter2 >
+    </label>
+    <label>
+      Ordenar:
+      <select class="ordenar" #filter3>
+        <option id="asc">ascendente</option>
+        <option id="desc">descendente</option>
+      </select>
+    </label>
+    <button class="primary" type="button" (click)="filterResults(filter1.value, filter2.checked, filter3.value)">Search</button>
   </form>
 
   <div style="margin-top: 20px; text-align: right;">

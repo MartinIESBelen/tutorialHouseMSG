@@ -139,20 +139,6 @@
       "longitude": -122.6784,
       "price": 2200,
       "available": true
-    },
-    {
-      "id": "c01f",
-      "name": "MartinHouse",
-      "city": "Málaga",
-      "state": "Andalucía",
-      "availableUnits": 1,
-      "price": 200000,
-      "wifi": false,
-      "laundry": false,
-      "available": true,
-      "photo": "",
-      "latitude": 0,
-      "longitude": 0
     }
   ]
 }

@@ -1,0 +1,19 @@
+.listing-apply {
+  margin-top: 20px;
+}
+.listing-apply form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 340px;
+}
+input {
+  padding: 10px;
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+}
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: -5px;
+}

@@ -6,10 +6,11 @@ import {inject} from '@angular/core';
 import {ResilientHousingService} from '../resilient-housing.service';
 import {RouterLink} from '@angular/router';
 
+
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HousingLocationComponent, RouterLink],
+  imports: [CommonModule, HousingLocationComponent, RouterLink, ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -22,6 +23,8 @@ export class HomeComponent implements OnInit {
   housingService= inject(ResilientHousingService);
 
   cd = inject(ChangeDetectorRef);
+
+
 
   constructor(){}
 
@@ -36,13 +39,27 @@ export class HomeComponent implements OnInit {
 
   }
 
-  filterResults(text: string){
+  filterResults(text: string, disponible: boolean, orden:String){
     if(!text){
       this.filteredLocationList = this.housingLocationList;
+      window.alert("No se encontraron viviendas que coincidan con los filtros")
       return;
     }
     this.filteredLocationList = this.housingLocationList.filter(l => l?.city.toLowerCase().includes(text.toLowerCase()));
+    if("asc" === orden.toLowerCase()){
+      this.filteredLocationList = this.filteredLocationList.sort((a,b) => a.city.localeCompare(b.city));
+    }else {
+      this.filteredLocationList = this.filteredLocationList.sort((a,b) => a.city.localeCompare(b.city));
+    }
+
+    if(disponible){
+      this.filteredLocationList = this.filteredLocationList.filter(l => l.available);
+    }else {
+      this.filteredLocationList = this.filteredLocationList.filter(l => l.available!);
+    }
 
   }
+
+
 }
 

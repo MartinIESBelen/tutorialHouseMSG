@@ -31,6 +31,25 @@ export class ResilientHousingService implements HousingProvider {
   async getHousingLocationById(id: number): Promise<HousingLocation | undefined> {
     // Reutilizamos la lógica resiliente: traemos todo y buscamos el ID
     const allLocations = await this.getAllHousingLocations();
-    return allLocations.find((item: HousingLocation) => item.id === id);
+    return allLocations.find((item: HousingLocation) => item.id == id);
+  }
+
+  async deleteHousingLocation(id: number): Promise<void> {
+    // URL específica para borrar ese ID: http://localhost:3000/locations/10
+    const url = `${this.apiUrl}/${id}`;
+
+    try {
+      const response = await fetch(url, {
+        method: 'DELETE'
+      });
+
+      if (!response.ok) {
+        throw new Error(`No se pudo borrar la casa con id ${id}`);
+      }
+      console.log(`Casa ${id} borrada correctamente`);
+    } catch (error) {
+      console.error('Error al intentar borrar:', error);
+      throw error;
+    }
   }
 }

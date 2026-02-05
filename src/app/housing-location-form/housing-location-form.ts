@@ -33,7 +33,6 @@ export class HousingLocationForm {
   errorMsg = '';
 
   onSubmit() {
-    // validar
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
@@ -41,28 +40,52 @@ export class HousingLocationForm {
 
     this.submitting = true;
 
-    // preparar objeto
-    const newHouse = {
-      ...this.form.value,
-      photo: "",
-      latitude: 0,
-      longitude: 0,
-    };
+    this.http.get<any[]>('http://localhost:3000/locations').subscribe({
+      next: (houses) => {
 
-    //  enviar
-    this.http.post('http://localhost:3000/locations', newHouse).subscribe({
-      next: (res: any) => {
-        this.successMsg = `¡Vivienda "${res.name}" creada con éxito!`;
-        this.submitting = false;
+        //Calcular ID numérico de forma segura (ignorando los que tengan letras)
+        const numericIds = houses
+          .map(h => Number(h.id))
+          .filter(id => !isNaN(id)); // Filtra los "NaN"
 
-        // esperar y volver al inicio
-        setTimeout(() => {
-          this.router.navigate(['/']);
-        }, 2000);
+        const maxId = numericIds.length > 0 ? Math.max(...numericIds) : 0;
+        const nextId = maxId + 1;
+
+        //Preparar el objeto con la estructura CORRECTA (sin 'coordinates' anidado)
+        const newHouse = {
+          id: nextId,
+          ...this.form.getRawValue(),
+          photo: 'https://angular.io/assets/images/tutorials/faa/bernard-hermant-CLKGGwIBTaY-unsplash.jpg',
+          latitude: 0,   // Propiedades planas, como pide tu interfaz
+          longitude: 0,
+        };
+
+        // Guardar la nueva casa
+        this.http.post('http://localhost:3000/locations', newHouse).subscribe({
+          next: (created: any) => {
+            // Uso de comillas invertidas ` ` para que funcionen las variables ${...}
+            this.successMsg = `Vivienda "${created.name}" creada con éxito (ID: ${created.id})`;
+
+            this.form.reset({
+              availableUnits: 1,
+              price: 10000,
+              wifi: false,
+              laundry: false,
+              available: true,
+            });
+            this.submitting = false;
+
+            setTimeout(() => this.router.navigate(['/']), 3000);
+          },
+          error: () => {
+            this.errorMsg = 'Error al guardar. Verifica que json-server esté corriendo.';
+            this.submitting = false;
+          },
+        });
       },
       error: (err) => {
-        console.error(err);
-        this.errorMsg = 'Error al guardar. Asegúrate de que json-server está corriendo.';
+        console.error('Error al obtener IDs:', err);
+        this.errorMsg = 'Error de conexión al calcular el ID.';
         this.submitting = false;
       }
     });

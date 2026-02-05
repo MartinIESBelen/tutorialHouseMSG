@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
-
 })
 export class WeatherService {
   private http = inject(HttpClient);

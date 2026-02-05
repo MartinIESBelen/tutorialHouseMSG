@@ -15,7 +15,8 @@
       <li>Status: {{ housingLocation?.available ? 'Available' : 'Occupied' }}</li>
     </ul>
   </section>
-  <section class="listing-apply">
+  <app-contact-form></app-contact-form>
+  <!--<section class="listing-apply">
     <h2 class="section-heading">Apply now ti live here</h2>
     <form [formGroup]="applyForm" (submit)="sumitApplication()">
       <label>Nombre:<input id="firstName" type="text" formControlName="firstName"></label>
@@ -32,7 +33,7 @@
       }
       <button type="submit" class="primary">Apply now</button>
     </form>
-  </section>
+  </section>-->
   @if (weatherData) {
     <section class="weather-section">
       <h2 class="section-heading">Current Weather</h2>
@@ -49,5 +50,11 @@
   <section class="map-section">
     <h2 class="section-heading">Location Map</h2>
     <div id="map"></div>
+  </section>
+  <!--Boton borra-->
+  <section class="delete-section">
+    <button type="button" class="delete-btn" (click)="deleteLocation()">
+      Eliminar Vivienda
+    </button>
   </section>
 </article>
