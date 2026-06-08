@@ -51,7 +51,6 @@ export class HousingLocationForm {
         const maxId = numericIds.length > 0 ? Math.max(...numericIds) : 0;
         const nextId = maxId + 1;
 
-        //Preparar el objeto con la estructura CORRECTA (sin 'coordinates' anidado)
         const newHouse = {
           id: nextId,
           ...this.form.getRawValue(),

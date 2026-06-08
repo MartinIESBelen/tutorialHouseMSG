@@ -1,40 +1,66 @@
-
-
 <section class="listing-apply">
   <h2>Formulario de contacto</h2>
-  <form [formGroup]="applyForm" (submit)="sumitApplication()">
-    <label>Nombre:<input id="firstName" type="text" formControlName="firstName"></label>
+
+  <form [formGroup]="applyForm" (ngSubmit)="sumitApplication()">
+
+    <label>
+      Nombre:
+      <input id="firstName" type="text" formControlName="firstName">
+    </label>
     @if(applyForm.get('firstName')?.invalid && applyForm.get('firstName')?.touched){
-      <span class="error">First Name is required</span>
+      <span class="error">El nombre es obligatorio</span>
     }
-    <label>Apellido:<input id="lastName" type="text" formControlName="lastName"></label>
+
+    <label>
+      Apellido:
+      <input id="lastName" type="text" formControlName="lastName">
+    </label>
     @if(applyForm.get('lastName')?.invalid && applyForm.get('lastName')?.touched){
-      <span class="error">Last Name is required</span>
+      <span class="error">El apellido es obligatorio</span>
     }
-    <label>Email:<input id="email" type="text" formControlName="email"></label>
+
+    <label>
+      Email:
+      <input id="email" type="email" formControlName="email">
+    </label>
     @if(applyForm.get('email')?.invalid && applyForm.get('email')?.touched){
-      <span class="error">Formato de Email mal introducido</span>
+      <span class="error">Formato de email incorrecto o vacío</span>
     }
 
-    <label>Fecha:<input id="fecha" type="date" formControlName="fecha"></label>
+    <label>
+      Fecha de la visita:
+      <input id="fecha" type="date" formControlName="fecha">
+    </label>
     @if(applyForm.get('fecha')?.invalid && applyForm.get('fecha')?.touched){
-      <span class="error">Fecha mal introducida</span>
+      <div class="error">
+        @if(applyForm.get('fecha')?.hasError('required')){
+          <span>La fecha es obligatoria</span>
+        }
+        @if(applyForm.get('fecha')?.hasError('pastDate')){
+          <span>La fecha de visita no puede ser anterior al día de hoy</span>
+        }
+      </div>
     }
 
-    <textarea id="comentario" type="" formControlName="comentario"></textarea>
-    @if(applyForm.get('comentario')?.invalid && applyForm.get('comentario')?.touched){
-      <span class="error"></span>
-    }
+    <label>
+      Comentario:
+      <textarea id="comentario" formControlName="comentario"></textarea>
+    </label>
 
-    <label>Política de privacidad<input id="politicaCheck" type="checkbox" formControlName="politicaCheck"></label>
+    <label>
+      Política de privacidad
+      <input id="politicaCheck" type="checkbox" formControlName="politicaCheck">
+    </label>
     @if(applyForm.get('politicaCheck')?.invalid && applyForm.get('politicaCheck')?.touched){
-      <span class="error">First Name is required</span>
+      <span class="error">Debes aceptar la política de privacidad</span>
     }
 
     <button type="submit" class="primary">Apply now</button>
 
-    @if (localStorage.getItem('applyForm')){
-      <p>Ya has estado en la aplicación {{this.applyForm.value.fecha}}</p>
+    @if (lastSavedDate) {
+      <p style="margin-top: 15px; color: #1976d2;">
+        Ya solicitaste una visita para esta vivienda el día: {{ lastSavedDate }}
+      </p>
     }
 
   </form>
