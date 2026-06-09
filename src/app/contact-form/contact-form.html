@@ -1,11 +1,11 @@
-<section class="listing-apply">
-  <h2>Formulario de contacto</h2>
+<section class="listing-apply card">
+  <h2 class="section-heading">Formulario de contacto</h2>
 
   <form [formGroup]="applyForm" (ngSubmit)="sumitApplication()">
 
     <label>
       Nombre:
-      <input id="firstName" type="text" formControlName="firstName">
+      <input id="firstName" type="text" formControlName="firstName" placeholder="Ej. Juan">
     </label>
     @if(applyForm.get('firstName')?.invalid && applyForm.get('firstName')?.touched){
       <span class="error">El nombre es obligatorio</span>
@@ -13,7 +13,7 @@
 
     <label>
       Apellido:
-      <input id="lastName" type="text" formControlName="lastName">
+      <input id="lastName" type="text" formControlName="lastName" placeholder="Ej. Pérez">
     </label>
     @if(applyForm.get('lastName')?.invalid && applyForm.get('lastName')?.touched){
       <span class="error">El apellido es obligatorio</span>
@@ -21,7 +21,7 @@
 
     <label>
       Email:
-      <input id="email" type="email" formControlName="email">
+      <input id="email" type="email" formControlName="email" placeholder="correo@ejemplo.com">
     </label>
     @if(applyForm.get('email')?.invalid && applyForm.get('email')?.touched){
       <span class="error">Formato de email incorrecto o vacío</span>
@@ -44,12 +44,12 @@
 
     <label>
       Comentario:
-      <textarea id="comentario" formControlName="comentario"></textarea>
+      <textarea id="comentario" formControlName="comentario" placeholder="¿Tienes alguna duda extra?"></textarea>
     </label>
 
-    <label>
-      Política de privacidad
+    <label class="checkbox-label">
       <input id="politicaCheck" type="checkbox" formControlName="politicaCheck">
+      Acepto la política de privacidad
     </label>
     @if(applyForm.get('politicaCheck')?.invalid && applyForm.get('politicaCheck')?.touched){
       <span class="error">Debes aceptar la política de privacidad</span>
@@ -58,9 +58,9 @@
     <button type="submit" class="primary">Apply now</button>
 
     @if (lastSavedDate) {
-      <p style="margin-top: 15px; color: #1976d2;">
-        Ya solicitaste una visita para esta vivienda el día: {{ lastSavedDate }}
-      </p>
+      <div class="success-message">
+        <p>Ya solicitaste una visita para esta vivienda el día: <strong>{{ lastSavedDate }}</strong></p>
+      </div>
     }
 
   </form>

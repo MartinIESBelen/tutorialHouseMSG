@@ -37,10 +37,17 @@ export class ContactForm implements OnInit {
       const parsedData = JSON.parse(saveData);
       this.applyForm.patchValue(parsedData);
       this.lastSavedDate = parsedData.fecha || null;
+
+      this.applyForm.disable();
     }
   }
 
   sumitApplication() {
+    if (this.lastSavedDate) {
+      alert("Ya has contactado con nosotros para esta vivienda. Por favor, espere una respuesta.");
+      return;
+    }
+
     if (this.applyForm.invalid) {
       this.applyForm.markAllAsTouched();
       return;
@@ -48,6 +55,8 @@ export class ContactForm implements OnInit {
 
     localStorage.setItem(this.storageKey, JSON.stringify(this.applyForm.value));
     this.lastSavedDate = this.applyForm.value.fecha || null;
+
+    this.applyForm.disable();
 
     console.log("Formulario guardado y enviado ", this.applyForm.value);
     alert(`Solicitud recibida: ${this.applyForm.value.firstName}, hemos guardado tus datos para esta vivienda.`);

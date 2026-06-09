@@ -6,8 +6,8 @@ import { HousingLocation } from './models/housinglocation';
   providedIn: 'root'
 })
 export class ResilientHousingService implements HousingProvider {
-  private readonly apiUrl = 'http://localhost:3000/locations'; // API Real
-  private readonly localUrl = '/db.json'; // Fallback local
+  private readonly apiUrl = 'http://127.0.0.1:3000/locations';
+  private readonly localUrl = '/db.json';
 
   async getAllHousingLocations(): Promise<HousingLocation[]> {
     try {
@@ -19,7 +19,6 @@ export class ResilientHousingService implements HousingProvider {
       console.warn(' Fallo en API, activando datos locales de emergencia');
       const fallback = await fetch(this.localUrl);
       const data = await fallback.json();
-      // Dependiendo del db.json, esto puede ser 'data' o 'data.locations'
       return data.locations || data;
     }
   }
