@@ -1,0 +1,98 @@
+.resenias-container {
+  margin-top: 20px;
+}
+
+.resenias-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.media-container {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.media-numero {
+  font-size: 24px;
+}
+
+.total-reviews {
+  font-size: 14px;
+  color: #777;
+  font-weight: normal;
+  margin-left: 5px;
+}
+
+.estrellas-selector {
+  font-size: 30px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  color: #ccc;
+  user-select: none;
+}
+
+.estrellas-selector span:hover,
+.estrellas-selector span.active,
+.resenia-estrellas {
+  color: #ffc107;
+}
+
+.nueva-resenia-box {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+
+.nueva-resenia-box h3 {
+  margin-top: 0;
+  font-size: 16px;
+  color: #444;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.resenia-item {
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+}
+
+.resenia-item:last-child {
+  border-bottom: none;
+}
+
+.resenia-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.resenia-fecha {
+  font-size: 12px;
+  color: #999;
+}
+
+.resenia-texto {
+  margin: 0;
+  color: #555;
+  line-height: 1.5;
+}
+
+.no-resenias {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}

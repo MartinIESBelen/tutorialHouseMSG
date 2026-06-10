@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input , OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HousingLocation } from '../models/housinglocation';
 import {RouterModule} from '@angular/router';
@@ -11,6 +11,21 @@ import {RouterModule} from '@angular/router';
   styleUrl: './housing-location.component.css',
 })
 
-export class HousingLocationComponent {
+export class HousingLocationComponent implements OnInit {
   @Input() housingLocation!: HousingLocation;
+  isFavorite: boolean = false;
+
+  ngOnInit(): void {
+    const savedFav = localStorage.getItem(`favorito_${this.housingLocation.id}`);
+
+    if (savedFav === 'true') {
+      this.isFavorite = true;
+    }
+  }
+
+  toggleFavorite(): void {
+    this.isFavorite = !this.isFavorite;
+
+    localStorage.setItem(`favorito_${this.housingLocation.id}`, String(this.isFavorite));
+  }
 }

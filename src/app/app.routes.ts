@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import {DetailsComponent} from './details/details.component';
 import { HousingLocationForm} from './housing-location-form/housing-location-form';
+import {FavoritosComponent} from './favorito/favorito';
 
 
 export const routes: Routes = [
@@ -19,6 +20,10 @@ export const routes: Routes = [
     path: 'add',
     component: HousingLocationForm,
     title: 'Add Location',
+  },
+  {
+    path: 'favoritos',
+    component: FavoritosComponent,
+    title: 'Mis Favoritos',
   }
-
 ];

@@ -6,11 +6,12 @@ import { WeatherService } from '../weather.service';
 import * as L from 'leaflet';
 import { ResilientHousingService } from '../resilient-housing.service';
 import { ContactForm } from '../contact-form/contact-form';
+import {ReseniaComponent} from '../resenia.component/resenia.component';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CommonModule, ContactForm, NgOptimizedImage],
+  imports: [CommonModule, ContactForm, NgOptimizedImage, ReseniaComponent],
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css']
 })
@@ -27,8 +28,15 @@ export class DetailsComponent implements OnInit {
 
   cd = inject(ChangeDetectorRef);
 
+  isFavorito: boolean = false;
+
   ngOnInit(): void {
     this.housingLocationId = Number(this.route.snapshot.params['id']);
+
+    const guardarFavorito = localStorage.getItem(`favorito_${this.housingLocationId}`);
+    if(guardarFavorito === 'true'){
+      this.isFavorito = true;
+    }
 
     this.housingService.getHousingLocationById(this.housingLocationId).then(locations => {
       this.housingLocation = locations;
@@ -38,6 +46,11 @@ export class DetailsComponent implements OnInit {
       }
       this.cd.detectChanges();
     });
+  }
+
+  toggleFavorite(): void {
+    this.isFavorito = !this.isFavorito;
+    localStorage.setItem(`favorito_${this.housingLocationId}`, String(this.isFavorito));
   }
 
   loadWeather(){

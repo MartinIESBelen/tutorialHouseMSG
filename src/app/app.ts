@@ -8,11 +8,17 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./app.css'],
   template: `
     <main>
-      <a [routerLink]="['/']">
-        <header class="brand-name">
+      <header class="brand-name" style="display: flex; justify-content: space-between; align-items: center; padding-right: 30px;">
+
+        <a [routerLink]="['/']">
           <img class="brand-logo" src="/casa.png" alt="logo" aria-hidden="true">
-        </header>
-      </a>
+        </a>
+
+        <a [routerLink]="['/favoritos']" style="text-decoration: none; color: var(--primary-color); font-weight: bold; font-size: 18px;">
+          ⭐ Mis Favoritos
+        </a>
+
+      </header>
 
       <section class="content">
         <router-outlet></router-outlet>

@@ -3,11 +3,18 @@
   <section class="listing-description">
     <h2 class="listing-heading">{{ housingLocation?.name }}</h2>
     <p class="listing-location">{{ housingLocation?.city }}, {{ housingLocation?.state }}</p>
+    <button type="button" class="details-favorite-btn" (click)="toggleFavorite()" title="Marcar como favorito" style="background: none; border: none; font-size: 30px; cursor: pointer;">
+      <span>{{ isFavorito ? '⭐' : '★' }} </span>
+      {{ isFavorito ? 'Guardado' : 'Añadir a favoritos' }}
+    </button>
   </section>
 
   <div class="image-wrapper">
     <img class="listing-photo" [src]="housingLocation?.photo" alt="Exterior photo of {{housingLocation?.name}}"/>
   </div>
+
+
+
 
   <div class="content-wrapper">
     <section class="listing-features card">
@@ -48,4 +55,7 @@
       </button>
     </section>
   </div>
+
+  <app-resenias [listaResenias]="housingLocation?.resenias || []"></app-resenias>
+
 </article>

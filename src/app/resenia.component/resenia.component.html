@@ -1,0 +1,34 @@
+<section class="resenias-container card">
+
+  <div class="resenias-header">
+    <h2 class="section-heading">Reseñas de la vivienda</h2>
+    <div class="media-container">
+      <span class="media-numero">{{ mediaEstrellas | number:'1.1-1' }}</span>
+      <span class="resenia-estrellas">★</span>
+      <span class="total-reviews">({{ listaResenias.length }} valoraciones)</span>    </div>
+  </div>
+
+  <div class="lista-resenias">
+    @if (!listaResenias || listaResenias.length === 0) {
+      <p class="no-resenias">Esta vivienda aún no tiene reseñas.</p>
+    } @else {
+
+      @for (resenia of reseniasOrdenadas; track $index) {
+        <div class="resenia-item">
+          <div class="resenia-top">
+            <div>
+              <strong>{{ resenia.nombre }}</strong>
+              <span class="resenia-fecha" style="margin-left: 10px;">{{ resenia.fecha }}</span>
+            </div>
+            <span class="resenia-estrellas">
+              @for (item of [].constructor(resenia.estrellas); track $index) { ★ }
+            </span>
+          </div>
+          <p class="resenia-texto">{{ resenia.comentario }}</p>
+        </div>
+      }
+
+    }
+  </div>
+
+</section>

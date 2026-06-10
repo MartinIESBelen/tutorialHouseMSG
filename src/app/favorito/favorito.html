@@ -1,0 +1,24 @@
+<section class="favorites-section">
+
+  <div class="favorites-header">
+    <h2>Mis Viviendas Favoritas</h2>
+    <span class="counter-badge">
+      {{ totalFavoritos }} {{ totalFavoritos === 1 ? 'vivienda' : 'viviendas' }} guardada
+    </span>
+  </div>
+
+  @if (filteredLocationList.length === 0) {
+    <div class="empty-favorites">
+      <p>Aún no has marcado ninguna vivienda como favorita. ⭐</p>
+    </div>
+  }
+
+  @else {
+    <div class="results">
+      @for (housingLocation of filteredLocationList; track housingLocation.id) {
+        <app-housing-location [housingLocation]="housingLocation"></app-housing-location>
+      }
+    </div>
+  }
+
+</section>
